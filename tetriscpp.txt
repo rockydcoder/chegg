@@ -1,0 +1,402 @@
+IN C++ (Need a code for a tetris game up to the point of stopping the shapes at the bottom of the bucket, or stopping them on top of other shapes. So it will show the bucket show and drop the shapes, and no stop the shapes)
+You have already displayed the Tetris Bucket and started dropping the shapes. During this module, you stop the falling shape at the bottom of the Bucket. If there are shapes already stacked at the bottom of the bucket, then you stop the shape on top of other shapes. At the same time, you drop another shape from the top. Add plenty of narrative comments. Your program must be compilable and executable.
+If you need guidance, you will find some detailed instruction (below) to assist you.
+User input is provided using the arrow keys. By default (with no user input being entered), the shape falls one cell in each loop. The shape can also be made to fall more quickly by pressing the down-arrow key. Assuming that you are using a switch block to handle the user input, in each switch case, you will change the top left x, y and calling different functions to process that arrow input. Regardless of which of the two methods triggered the shape's downward movement, you will probably call the function processDownArrow(TetrisShape& tetrisShape). You will probably find that you need separate functions to handle different key inputs.
+if (shapeArray[x][y] != ' '){
+     if (x,y dimensions are inside the bucket){
+          if bucket cell is not empty{
+               The shape is stuck
+          }
+     }
+     else if (x dimension reaches the bottom){
+          The shape is stuck, so stop the shape.
+     }
+     else{
+          /*Here the shape hits the side wall, but not stuck. The situation is, the shape is at the left wall, and user is pressing the left arrow. In this case, the input is ineffective. So, we will let the shape drop one cell here, and call the processDownArrow(*this). The processDownArrow function will return a bool value whether the shape is stuck or not.*/
+          if (the shape is stuck){
+               Stop the shape
+          }
+          else{
+               the shape is not stuck, let it fall
+          }
+     }
+}
+ 
+When the current shape stops at the bottom, the next shape starts to drop. In the main() function, before the while loop (game loop), you will create two Tetris objects at the same time: currentTetrisShape, and nextTetrisShape. Inside the game loop, when the current shape is stuck, you check whether a line is complete. Then, you call currentTetrisShape.setShape(nextTetrisShapeType). In the setShape() function, you assign the properties of the shape: shapeType, top left X and Y, shapeArray, etc. Then you call nextTetrisShape.setShape (use a new randomly generated int).
+In each of these arrow-key input process functions, you need to check whether the shape is stuck and needs to stop. You need to go over the values of the shape array using two nested "for loops". Remember, the shape is not stuck if the cell is empty. Below is the logic to check when the shape is stuck:
+The code I have so far is below. If you have a better code up to this point that would be fine also. (I use Visual Studio)
+#include "stdafx.h"
+#include <iostream>
+#include <Windows.h>
+#include <cstdlib>
+#include <time.h>
+
+using namespace std;
+class TetrisShape
+{
+public:
+    int shapeTopLeftX;
+    int shapeTopLeftY;
+    /// active bool is prevent user input and stop object moving
+    bool active = true;
+    TetrisShape()
+    {
+        shapeTopLeftX = 6;
+        shapeTopLeftY = 0;
+    }
+    char shapeArray[4][4];
+    int stoppointY[4];
+    void populateShapeArray(int shapeType)
+    {
+        int a = 0, b = 1, c = 2, d = 3;
+        switch (shapeType)
+        {
+        case 1:
+            shapeArray[a][0] = ' '; shapeArray[b][0] = '#'; shapeArray[c][0] = ' '; shapeArray[d][0] = ' ';
+            shapeArray[a][1] = ' '; shapeArray[b][1] = '#'; shapeArray[c][1] = ' '; shapeArray[d][1] = ' ';
+            shapeArray[a][2] = ' '; shapeArray[b][2] = '#'; shapeArray[c][2] = '#'; shapeArray[d][2] = ' ';
+            shapeArray[a][3] = ' '; shapeArray[b][3] = ' '; shapeArray[c][3] = ' '; shapeArray[d][3] = ' ';
+            stoppointY[a] = 0;
+            stoppointY[b] = 3;
+            stoppointY[c] = 3;
+            stoppointY[d] = 0;
+            break;
+        case 2:
+            shapeArray[a][0] = ' '; shapeArray[b][0] = '#'; shapeArray[c][0] = ' '; shapeArray[d][0] = ' ';
+            shapeArray[a][1] = ' '; shapeArray[b][1] = '#'; shapeArray[c][1] = ' '; shapeArray[d][1] = ' ';
+            shapeArray[a][2] = ' '; shapeArray[b][2] = '#'; shapeArray[c][2] = ' '; shapeArray[d][2] = ' ';
+            shapeArray[a][3] = ' '; shapeArray[b][3] = '#'; shapeArray[c][3] = ' '; shapeArray[d][3] = ' ';
+            stoppointY[a] = 0;
+            stoppointY[b] = 4;
+            stoppointY[c] = 0;
+            stoppointY[d] = 0;
+            break;
+        case 3:
+            shapeArray[a][0] = ' '; shapeArray[b][0] = '#'; shapeArray[c][0] = '#'; shapeArray[d][0] = ' ';
+            shapeArray[a][1] = ' '; shapeArray[b][1] = '#'; shapeArray[c][1] = '#'; shapeArray[d][1] = ' ';
+            shapeArray[a][2] = ' '; shapeArray[b][2] = ' '; shapeArray[c][2] = ' '; shapeArray[d][2] = ' ';
+            shapeArray[a][3] = ' '; shapeArray[b][3] = ' '; shapeArray[c][3] = ' '; shapeArray[d][3] = ' ';
+            stoppointY[a] = 0;
+            stoppointY[b] = 2;
+            stoppointY[c] = 2;
+            stoppointY[d] = 0;
+            break;
+        case 4:
+            shapeArray[a][0] = ' '; shapeArray[b][0] = '#'; shapeArray[c][0] = '#'; shapeArray[d][0] = ' ';
+            shapeArray[a][1] = '#'; shapeArray[b][1] = '#'; shapeArray[c][1] = ' '; shapeArray[d][1] = ' ';
+                shapeArray[a][2] = ' '; shapeArray[b][2] = ' '; shapeArray[c][2] = ' '; shapeArray[d][2] = ' ';
+            shapeArray[a][3] = ' '; shapeArray[b][3] = ' '; shapeArray[c][3] = ' '; shapeArray[d][3] = ' ';
+            stoppointY[a] = 2;
+            stoppointY[b] = 2;
+            stoppointY[c] = 1;
+            stoppointY[d] = 0;
+            break;
+        case 5:
+            shapeArray[a][0] = '#'; shapeArray[b][0] = '#'; shapeArray[c][0] = ' '; shapeArray[d][0] = ' ';
+            shapeArray[a][1] = ' '; shapeArray[b][1] = '#'; shapeArray[c][1] = '#'; shapeArray[d][1] = ' ';
+            shapeArray[a][2] = ' '; shapeArray[b][2] = ' '; shapeArray[c][2] = ' '; shapeArray[d][2] = ' ';
+            shapeArray[a][3] = ' '; shapeArray[b][3] = ' '; shapeArray[c][3] = ' '; shapeArray[d][3] = ' ';
+            stoppointY[a] = 1;
+            stoppointY[b] = 2;
+            stoppointY[c] = 2;
+            stoppointY[d] = 0;
+            break;
+        case 6:
+            shapeArray[a][0] = ' '; shapeArray[b][0] = '#'; shapeArray[c][0] = ' '; shapeArray[d][0] = ' ';
+            shapeArray[a][1] = ' '; shapeArray[b][1] = '#'; shapeArray[c][1] = ' '; shapeArray[d][1] = ' ';
+            shapeArray[a][2] = '#'; shapeArray[b][2] = '#'; shapeArray[c][2] = ' '; shapeArray[d][2] = ' ';
+            shapeArray[a][3] = ' '; shapeArray[b][3] = ' '; shapeArray[c][3] = ' '; shapeArray[d][3] = ' ';
+            stoppointY[a] = 3;
+            stoppointY[b] = 3;
+            stoppointY[c] = 0;
+            stoppointY[d] = 0;
+            break;
+        }
+    }
+};
+class TetrisShape
+{
+    SimpleGameSample *renderer;
+
+    TetrisBucket *bucket;
+public:
+    TetrisPieceType Piece;
+
+    int CurrentRotation;
+
+    int PosX, PosY;
+
+    TetrisShape() : PosX(0), PosY(0), CurrentRotation(-1) {}
+
+    void SetShape(TetrisPieceType &);
+
+    inline void Init(SimpleGame Sample *r, TetrisBucket *b)
+    {
+        renderer = r;
+        bucket = b;
+    }
+
+    inline bool HasShape()
+    {
+        return (CurrentRotation != -1);
+    }
+
+    void MoveLeft();
+    void MoveRight();
+    bool MoveDown();
+    void MoveToBottom();
+    void Rotate();
+    void Activate();
+
+    void Draw(bool = false);
+    void Draw(int, int);
+
+    bool Update(int);
+
+    inline int GetWidth()
+    {
+        return lastUsedColumn() - firstUsedColumn() + 1;
+    }
+    inline int GetHeight()
+    {
+        return lastUsedRow() - firstUsedRow() + 1;
+    }
+private:
+    inline bool isObjectInRow(int row)
+    {
+        return (Piece.Shape[CurrentRotation][row][0] || Piece.Shape[CurrentRotation][row][1] || Piece.Shape[CurrentRotation][row][2] || Piece.Shape[CurrentRotation][row][3]);
+    }
+
+    inline bool isObjectInColumn(int col)
+    {
+        return (Piece.Shape[CurrentRotation][0][col] || Piece.Shape[CurrentRotation][1][col] || Piece.Shape[CurrentRotation][2][col] || Piece.Shape[CurrentRotation][3][col]);
+    }
+
+    int firstUsedRow()
+    {
+        int row = 0;
+        while (!isObjectInRow(row))
+            row++;
+        return row;
+    }
+
+    int lastUsedRow()
+    {
+        int row = 3;
+        while (!isObjectInRow(row))
+            row--;
+        return row;
+    }
+
+    int firstUsedColumn()
+    {
+        int col = 0;
+        while (!isObjectInColumn(col))
+            col++;
+        return col;
+    }
+
+    int lastUsedColumn()
+    {
+        int col = 3;
+        while (!isObjectInColumn(col))
+            col--;
+        return col;
+    }
+
+    bool isAtTop();
+    bool isAtBottom();
+    bool isAtLeft();
+    bool isAtRight();
+    int LastMoveTime;
+};
+class TetrisBucket
+{
+    SimpleTetris *renderer;
+
+    Paintbrush bucketBrush;
+public:
+    void Init(SimpleTetris *r);
+
+    void Reset();
+
+    void keepResources();
+
+    void Draw();
+
+    void Add(TetrisShape &, int &score, int &linesCleared, int &level);
+
+    bool IsCollision(TetrisShape *);
+
+    static int const BucketSizeX = 10;
+    static int const BucketSizeY = 20;
+
+    static int TopSide;
+    static int LeftSide;
+
+    static int const BucketWidth = 10;
+private:
+    int board[BucketSizeY][BucketSizeX];
+};
+
+class SimpleTetris : public SimpleGameSample
+{
+public:
+    static int BlockSize;
+
+    static int const numShapeTypes = 7;
+
+    TetrisPieceType Pieces[numShapeTypes];
+
+    static int const LinesPerLevel = 20;
+
+    SimpleTetris();
+private:
+    bool keepResources();
+    void quitResources();
+    void UpdateObjects();
+    void OnKeyPress(WPARAM);
+    void DisplayScene();
+
+    Paintbrush nextBoxBrush;
+
+    TextFormat textFormat;
+    Paintbrush textBrush;
+    TextFormat scoreFormat;
+    Paintbrush scoreBrush;
+    TextFormat gameOverFormat;
+    Paintbrush gameOverBrush;
+
+    TetrisShape currentShape;
+    TetrisShape nextShape;
+
+    TetrisBucket bucket;
+
+    int gameState;
+
+    int level;
+    int score;
+
+    int linesCleared;
+
+    void modernGame();
+
+    void modernPiece();
+};
+int TetrisBucket::TopSide = 0;
+int TetrisBucket::LeftSide = 0;
+int SimpleTetris::BlockSize = 0;
+const int width = 12;
+const int height = 25;
+int bucketobjectheight[width];
+char bucket[height][width] =
+{
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#' },
+    { '#','#','#','#','#','#','#','#','#','#','#','#' }
+};
+void InitializeBucket()
+{
+    for (int i = 0;i<width;i++)
+    {
+        bucketobjectheight[i] = 20;
+    }
+}
+
+void setCursorTo(int x, int y)
+{
+    HANDLE handle;
+    COORD position;
+    handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    position.X = x;
+    position.Y = y;
+    SetConsoleCursorPosition(handle, position);
+}
+void drawBucket()
+{
+    setCursorTo(0, 0);
+    for (int x = 0; x <= height; x++)
+    {
+        for (int y = 0; y < width; y++)
+        {
+            cout << bucket[x][y];
+        }
+        cout << endl;
+        ///change this to draw bucket nicely
+    }
+}
+/// this variable need to declare outside this void
+/// else it will keep refresh and reset
+int movedown = 0;
+void updateBucket(TetrisShape localTetrisShape)
+{
+    movedown++;
+    int shapeTopLeftX = 6;
+    for (int i = 0;i<width;i++)
+    {
+        for (int a = 0;a<4;a++)
+        {
+            if (i>i - 4)
+            {
+                break;
+            }
+            if (localTetrisShape.stoppointY[a] + movedown >= bucketobjectheight[i + a] && localTetrisShape.active == true)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    bucketobjectheight[shapeTopLeftX + j] -= localTetrisShape.stoppointY[j];
+                }
+                localTetrisShape.active = false;
+            }
+        }
+    }
+
+    if (localTetrisShape.active == true)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                bucket[movedown + i][shapeTopLeftX + j] = localTetrisShape.shapeArray[i][j];
+            }
+        }
+    }
+}
+int _tmain(int argc, _TCHAR* argv[])
+{
+    TetrisShape shape;
+    int gameOver = 0;
+    InitializeBucket();
+    while (gameOver == 0)
+    {
+        srand(time(NULL));
+        int number = rand() % 6 + 1;
+        shape.populateShapeArray(1);
+        updateBucket(shape);
+        drawBucket();
+        Sleep(500);
+    }
+    return 0;
+}

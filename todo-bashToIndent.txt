@@ -1,0 +1,35 @@
+Linux & Unix
+Write a bash program to indent the code in a bash source file.
+
+Conditions:
+
+    The source file will contain only printing characters, spaces, and newlines. It is not necessary to check for invalid input.
+    The source file will not contain comments (words beginning with #).
+
+Requirements:
+
+    Read from standard input, write to standard output.
+    Code inside while statements should be indented 2 spaces.
+
+Be sure your program includes all of the following:
+
+    comments with your name, the date, and the assignment
+    comments with instructions for using the program
+    descriptive names and/or comments explaining variables & functions
+    indentation of code blocks (in your source)
+    comments explaining any non-obvious control flow
+
+The program is due Sunday Jan 03 at midnight. Submit your program by email on our class server with:
+  mail -s 'assignment 2' stuart < source-file
+
+where source-file is the name of your program file.
+
+Hints:
+
+    think about the structure of your data and logic before you write any code
+    start with the smallest possible amount of code
+    make sure your existing code works before adding new code
+    add the smallest possible amount of new code, then test again
+    output variable values, loop counts, etc. for debugging
+    test your code with a variety of inputs
+    anticipate error conditions and handle them gracefully.

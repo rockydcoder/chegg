@@ -1,0 +1,149 @@
+Q.The College of Computer has requested a new system to inform the applicants if they where accepted or not. The system admin and the applicants themselves can access the system.
+Learning Objective(s)
+• Write efficient algorithms to solve the problem.
+• To gain experience writing programs in visual C++.
+• Practice simple data structure design in visual C++
+• .Usage  function isdigit() .
+As a start, the main menu will appear to the user as follows:
+Welcome to CoC,,
+If you are the admin, please press 1.
+If you are an applicant, please press 2. Press 0 to Exit.
+Please enter you choice:
+When the user enters 1 he will be directed to the system admin menu, and if he entered 2 he will
+be directed to the applicants menu. If he chooses 0 the program will stop.
+ The System Admin:
+System admin will be able to enter the accepted student’s name, address, telephone and email
+and give them a student ID. He also can delete student information from the list. Another option
+for him is to send an acceptance message to a specific applicant as follows:
+Dear Mais Mohammed,
+Congratulation, You have been accepted as a student in College of Computer, Qassim
+University. Your information is
+Address: ARrass
+Phone: 3330000
+Email: mais@gmil.com
+Student ID: 4341100
+Good Luck
+-----------------------------------------------------------------------------------------
+Sample output:
+Here is a sample output of the program, words in bold are entered by the user.
+Welcome to CoC,,
+If you are the admin, please press 1.
+If you are an applicant, please press 2.
+Press 0 to Exit.
+Please enter you choice: 1
+You are a system admin
+Please choose an option from the menu bellow:
+1- Enter a new student.
+2- Delete a student.
+3- Send a message to a student.
+4- Back to the main menu.
+Your option: 1
+Please enter the student information
+Name : Mais Mohammad
+Address: Arrass
+Phone: 3330000
+Email: mais@gmail.com
+Student ID: 4341100
+Information has been saved successfully.
+Please choose an option from the menu bellow:
+1- Enter a new student.
+2- Delete a student.
+3- Send a message to a student.
+4- Back to the main menu.
+Your option: 1
+Please enter the student information
+Name : Samar Nasser
+Address: Arrass
+Phone: 3331111
+Email: samar@gmail.com
+Student ID: 4341122
+Information has been saved successfully.
+Please choose an option from the menu bellow:
+1- Enter a new student.
+2- Delete a student.
+3- Send a message to a student.
+4- Back to the main menu.
+Your option: 2
+Please enter a student ID to delete: 4341111
+Sorry, the student with this number can’t be found.
+Please choose an option from the menu bellow:
+1- Enter a new student.
+2- Delete a student.
+3- Send a message to a student.
+4- Back to the main menu.
+Your option: 2
+Please enter a student ID to delete: 4341122
+Are you sure you want to delete Samar information? N
+No deletion.
+Please choose an option from the menu bellow:
+1- Enter a new student.
+2- Delete a student.
+3- Send a message to a student.
+4- Back to the main menu.
+Your option: 2
+Please enter a student ID to delete: 4341122
+Are you sure you want to delete Samar information? Y
+The student information has been deleted Please choose an option from the menu bellow:
+1- Enter a new student.
+2- Delete a student.
+3- Send a message to a student.
+4- Back to the main menu.
+Your option: 3
+Please enter the student ID: 4341111
+Sorry, the student with this number can’t be found.
+Please choose an option from the menu bellow:
+1- Enter a new student.
+2- Delete a student.
+3- Send a message to a student.
+4- Back to the main menu.
+Your option: 3
+Please enter the student ID: 4341100
+The following message will be sent..
+Dear Mais Mohammad,
+Congratulation, You have been accepted as a student in College of Computer, Qassim
+University. Your information is
+Address: Arrass
+Phone: 3330000
+Email: mais@gmil.com
+Student ID: 4341100
+Good Luck
+Please choose an option from the menu bellow:
+1- Enter a new student.
+2- Delete a student.
+3- Send a message to a student.
+4- Back to the main menu.
+Your option: 4
+If you are the admin, please press 1.
+If you are an applicant, please press 2.
+Press 0 to Exit.
+Please enter you choice: 2
+You are an applicant.
+Please choose an option from the menu bellow:
+1- Search for your name.
+2- Back to the main menu.
+Your option: 1
+Please enter your name: Samar Nasser.
+Sorry, we can’t find your name in the database, please check the spelling or contact the
+student affair in CoC.
+Please choose an option from the menu bellow:
+1- Search for your name.
+2- Back to the main menu.
+Your option: 1
+Please enter your name: Mais Mohammad
+Dear Mais Mohammad,
+Congratulation, You have been accepted as a student in College of Computer, Qassim
+University. Your information is
+Address: ARrass
+Phone: 3330000
+Email: mais@gmil.com
+Student ID: 4341100
+Good Luck
+Please choose an option from the menu bellow:
+1- Search for your name.
+2- Back to the main menu.
+Your option: 2
+If you are the admin, please press 1.
+If you are an applicant, please press 2.
+Press 0 to Exit.
+Please enter you choice: 0
+Thank you for using out System, Good Bye.
