@@ -1,0 +1,75 @@
+To reinforce the use of If-Else statements To learn how to use while loops Introduction: Ninja Academy Ninjas are awesome! Your friend has not stopped talking about how cool ninjas and how they would like to become a ninja. To amuse your friend, you have decided to create a series of programs about ninjas.
+ 
+Problem: Ninja Exercising (ninjaexercise.c) Based on your AMAZING scores on the Ninja Evaluation Test, the Ninja Academy has decided that you are ready for the path of the ninja! Before you can learn all the wonderful skills they teach, you have to get a foundation first. Your ninja mentor has provided you with a small list of calisthenics for you to perform. They include kung fu, bojutsu, and rope climbing. These exercises are designed to sharpen your mind and body.
+In this program, the user will be displayed with a menu and with an option for practicing each exercise as well as an option for exiting the menu. Whenever a user does either kung fu or bojustu, they will add onto their total for calisthenics. Whenever a user does rope climbing, the user will be prompted to enter the amount of distance (in meters) they climbed. After any choice, the user will be informed about how many calisthenics and how much rope they climbed. After the user exits the menu, it will have one last check to see if they at least trained a bit in both calisthenics and rope climbing. If so, the user will be informed they are on their way to path of the ninja.
+Otherwise, they need to practice more!
+Input Specification
+1. The menu input will be a positive integer between 1 and 4
+2. The distance for option 3 will be an integer >= 0
+Output Specification Have a menu that shows the options for your ninja:
+1. Practice Kung Fu
+2. Practice Bojustu
+3. Practice Rope Climbing
+4. Stop training for the day
+When practicing Kung Fu (1), the user: You go to the dojo and practice your Kung Fu!
+When practicing Bojustu (2): You go to the courtyard and practice your Bojustu! When practicing rope climbing
+(3): You go to the rope climbing equipment inside the dojo.
+How much distance did you cover?
+Then the user will input their number for meters After each option, you will need: You have done X calisthenics and Ym distance in rope climbing. Where X is the number of calisthenics the user has done Where Y is the total distance of rope climbing the user has done When the user has finally selected option 4, you will check to see if the user has made any progress.
+If both X and Y are greater than zero, print: You are on the path to being a ninja!
+Otherwise, print: You will need to train more if you want to be a ninja!
+Output Samples Below are some sample outputs of running the program. Note that these samples are NOT a comprehensive test. You should test your program with different data than is shown here based on the specifications given above. In the sample run below, for clarity and ease of reading, the user input is given in italics while the program output is in bold. (Note: When you actually run your program no bold or italics should appear at all. These are simply used in this description for clarity’s sake.)
+Sample Run #1
+Ninja Calisthenics
+1. Practice Kung Fu
+2. Practice Bojustu
+3. Practice Rope Climbing
+4. Stop training for the day
+Choose your exercise!
+1 You go to the dojo and practice your Kung Fu!
+You have done 1 calisthenics and 0m distance in rope climbing.
+Ninja Calisthenics
+1. Practice Kung Fu
+2. Practice Bojustu
+3. Practice Rope Climbing
+4. Stop training for the day 
+
+Choose your exercise!
+2 You go to the courtyard and practice your Bojustu!
+2 You have done 2 calisthenics and 0m distance in rope climbing.
+Ninja Calisthenics
+1. Practice Kung Fu
+2. Practice Bojustu
+3. Practice Rope Climbing
+4. Stop training for the day
+Choose your exercise! 
+3 You go to the rope climbing equipment inside the dojo.
+How much distance did you cover?
+40 You have done 2 calisthenics and 40m distance in rope climbing.
+Ninja Calisthenics |
+1. Practice Kung Fu
+2. Practice Bojustu
+3. Practice Rope Climbing
+4. Stop training for the day
+Choose your exercise!
+4 You have done 2 calisthenics and 40m distance in rope climbing.
+You are on the path to being a ninja!
+Sample Run #2
+Ninja Calisthenics
+1. Practice Kung Fu
+2. Practice Bojustu
+3. Practice Rope Climbing
+4. Stop training for the day
+Choose your exercise! 
+2 You go to the courtyard and practice your Bojustu!
+You have done 1 calisthenics and 0m distance in rope climbing.
+Ninja Calisthenics
+1. Practice Kung Fu
+2. Practice Bojustu
+3. Practice Rope Climbing
+4. Stop training for the day
+Choose your exercise!
+3 4 You have done 1 calisthenics and 0m distance in rope climbing.
+You will need to train more if you want to be a ninja!
+Deliverables One source files – ninjaexercise.c – is to be submitted over WebCourses.
+Restrictions Although you may use other compilers, your program must compile and run using Code::Blocks. Your program should include a header comment with the following information: your name, course number, section number, assignment title, and date. Also, make sure you include comments throughout your code describing the major steps in solving the problem.

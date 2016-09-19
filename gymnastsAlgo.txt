@@ -1,0 +1,4 @@
+Step 1: Get the name and score of each gymnast and write it as a list.
+Step 2: Write the name of the first gymnast and his/her score on a separate sheet, assuming it to be highest.
+Step 3: Go through the list one by one, if you find a score higher than the current maximum score, just replace the score and name of the gymnast.
+Step 4: As you reach the end of the list, you will have the maximum score and the gymnast who earned it on the other sheet.
